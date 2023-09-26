@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:28:07 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/26 12:49:00 by amennad          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:30:07 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include <stdio.h>
 #include <strings.h>
 
+void	ft_sigusr1(int sig)
+{
+	(void)sig;
+	ft_printf("SIGUSR1 received\n");
+}
+
+void	ft_sigusr2(int sig)
+{
+	(void)sig;
+	ft_printf("SIGUSR2 received\n");
+}
 
 int	main(void)
 {
@@ -23,6 +34,8 @@ int	main(void)
 	ft_printf("Listening...\n");
 	printf("SIGUSR1: %d\n", SIGUSR1);
 	printf("SIGUSR2: %d\n", SIGUSR2);
+	signal(SIGUSR1, ft_sigusr1);
+	signal(SIGUSR2, ft_sigusr2);
 	while (1)
 	{
 		continue;
