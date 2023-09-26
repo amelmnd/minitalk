@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:28:02 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/26 12:50:31 by amennad          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:32:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 	ft_printf("server pid: %d\n", ft_atoi(argv[1]));
 	ft_printf("message: %s\n", argv[2]);
 
-	kill(ft_atoi(argv[1]), SIGUSR1);
+	// kill(ft_atoi(argv[1]), SIGUSR1);
+	kill(ft_atoi(argv[1]), SIGUSR2);
 	return (0);
 }
