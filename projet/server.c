@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:28:07 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/26 14:30:07 by amennad          ###   ########.fr       */
+/*   Updated: 2023/09/26 16:16:29 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,34 @@ void	ft_sigusr2(int sig)
 	ft_printf("SIGUSR2 received\n");
 }
 
+
+void  sig_handler (int sig)
+{
+	if (sig)
+		printf("signal received\n");
+}
+
+
 int	main(void)
 {
-	ft_printf("Server PID: %d\n", getpid());
+	struct sigaction act;
+	sigset_t    signal_set;
+	pid_t		pid;
+
+	pid = getpid();
+	sigemptyset(&signal_set);
+	sigaddset(&signal_set, SIGINT);
+	sigaddset(&signal_set, SIGQUIT);
+	act.sa_mask = signal_set;
+	act.sa_flags = SA_SIGINFO;
+	act.sa_handler = &sig_handler;
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
+
+	ft_printf("Server PID: %d\n", pid);
 	ft_printf("Listening...\n");
-	printf("SIGUSR1: %d\n", SIGUSR1);
-	printf("SIGUSR2: %d\n", SIGUSR2);
-	signal(SIGUSR1, ft_sigusr1);
-	signal(SIGUSR2, ft_sigusr2);
+
+
 	while (1)
 	{
 		continue;
