@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 17:28:07 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/27 14:27:14 by amennad          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:30:24 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	handle_signal(int signum, siginfo_t *info, void *context)
 
 	printf("Bit %d : %d\n", bit_count-1, (signum == SIGUSR1) ? 1 : 0);
 	printf("Bit_count: %d\n", bit_count);
-	if (bit_count == 7)
+	if (bit_count == 8)
 	{
 		caractere = convert_to_character(received_bits);
 		printf("Tableau binaire: %s\n", received_bits);
