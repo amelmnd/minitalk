@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 17:28:02 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/28 12:30:44 by amennad          ###   ########.fr       */
+/*   Created: 2023/09/28 12:11:08 by amennad           #+#    #+#             */
+/*   Updated: 2023/09/28 12:31:16 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ void	ft_error(char *msg)
 	exit(1);
 }
 
-void	sig_handler(int signum)
+void	sig_handler(int signum, siginfo_t *info, void *context)
 {
-	(void)signum;
+	(void)context;
+	(void)info;
 	g_get_signal = 1;
+	if (signum == SIGUSR1)
+	{
+		ft_printf("Message received by server.\n");
+	}
 }
 
 int	ft_char_to_binary(char c, int pid)
@@ -68,7 +73,7 @@ int	main(int argc, char **argv)
 	i = 0;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_flags = SA_RESTART | SA_SIGINFO;
-	sig.sa_handler = &sig_handler;
+	sig.sa_sigaction = sig_handler;
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
 	if (sigaction(SIGUSR1, &sig, NULL) < 0)

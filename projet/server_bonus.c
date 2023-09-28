@@ -1,11 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/25 17:28:07 by amennad           #+#    #+#             */
+/*   Created: 2023/09/28 12:10:59 by amennad           #+#    #+#             */
 /*   Updated: 2023/09/28 12:30:53 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ void	sig_handler(int signum, siginfo_t *info, void *context)
 		else
 		{
 			ft_printf("%s\n", message);
-			kill(pid, SIGUSR1);
+			kill(info->si_pid, SIGUSR1);
 			pid = 0;
 			free(message);
 			message = NULL;
